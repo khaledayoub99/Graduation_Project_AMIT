@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -120,6 +120,15 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ADC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ADC_Cfg.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Atmega32_REG.h">
       <SubType>compile</SubType>
     </Compile>
@@ -157,6 +166,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="STD.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Temp_Sensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Temp_Sensor.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

@@ -3,21 +3,21 @@ Microcontroler2.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000004ae  00000000  00000000  00000074  2**1
+  0 .text         0000056a  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000024  00800060  000004ae  00000522  2**0
+  1 .data         00000060  00800060  0000056a  000005de  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .comment      00000030  00000000  00000000  00000546  2**0
+  2 .comment      00000030  00000000  00000000  0000063e  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000578  2**2
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000670  2**2
                   CONTENTS, READONLY
-  4 .debug_info   000004e6  00000000  00000000  000005b4  2**0
+  4 .debug_info   000004e6  00000000  00000000  000006ac  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 000004a3  00000000  00000000  00000a9a  2**0
+  5 .debug_abbrev 000004a3  00000000  00000000  00000b92  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   00000115  00000000  00000000  00000f3d  2**0
+  6 .debug_line   00000115  00000000  00000000  00001035  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_str    00000196  00000000  00000000  00001052  2**0
+  7 .debug_str    00000196  00000000  00000000  0000114a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -57,16 +57,16 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	ee ea       	ldi	r30, 0xAE	; 174
-  68:	f4 e0       	ldi	r31, 0x04	; 4
+  66:	ea e6       	ldi	r30, 0x6A	; 106
+  68:	f5 e0       	ldi	r31, 0x05	; 5
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
   6e:	0d 92       	st	X+, r0
-  70:	a4 38       	cpi	r26, 0x84	; 132
+  70:	a0 3c       	cpi	r26, 0xC0	; 192
   72:	b1 07       	cpc	r27, r17
   74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
-  76:	0e 94 08 02 	call	0x410	; 0x410 <main>
-  7a:	0c 94 55 02 	jmp	0x4aa	; 0x4aa <_exit>
+  76:	0e 94 0b 02 	call	0x416	; 0x416 <main>
+  7a:	0c 94 b3 02 	jmp	0x566	; 0x566 <_exit>
 
 0000007e <__bad_interrupt>:
   7e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -80,10 +80,10 @@ Disassembly of section .text:
   8e:	61 e0       	ldi	r22, 0x01	; 1
   90:	83 e0       	ldi	r24, 0x03	; 3
   92:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
-  96:	0c 94 4a 02 	jmp	0x494	; 0x494 <UART_Init>
+  96:	0c 94 a8 02 	jmp	0x550	; 0x550 <UART_Init>
 
 0000009a <bluetooth_ReceiveByte>:
-  9a:	0c 94 51 02 	jmp	0x4a2	; 0x4a2 <UART_ReceiveByte>
+  9a:	0c 94 af 02 	jmp	0x55e	; 0x55e <UART_ReceiveByte>
 
 0000009e <DIO_SetPinDir>:
   9e:	44 23       	and	r20, r20
@@ -510,81 +510,165 @@ Disassembly of section .text:
  40a:	cf 91       	pop	r28
  40c:	0c 94 19 01 	jmp	0x232	; 0x232 <LCD_WriteCommand>
 
-00000410 <main>:
- 410:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_Init>
- 414:	0e 94 41 00 	call	0x82	; 0x82 <bluetooth_Init>
- 418:	0e 94 29 02 	call	0x452	; 0x452 <SPI_Master_Init>
- 41c:	0e 94 40 02 	call	0x480	; 0x480 <SPI_Master_InitTrans>
- 420:	60 e0       	ldi	r22, 0x00	; 0
- 422:	80 e0       	ldi	r24, 0x00	; 0
- 424:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
- 428:	80 e6       	ldi	r24, 0x60	; 96
- 42a:	90 e0       	ldi	r25, 0x00	; 0
- 42c:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
- 430:	8a e6       	ldi	r24, 0x6A	; 106
- 432:	90 e0       	ldi	r25, 0x00	; 0
- 434:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
- 438:	60 e0       	ldi	r22, 0x00	; 0
- 43a:	81 e0       	ldi	r24, 0x01	; 1
- 43c:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
- 440:	82 e7       	ldi	r24, 0x72	; 114
- 442:	90 e0       	ldi	r25, 0x00	; 0
- 444:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
- 448:	0e 94 4d 00 	call	0x9a	; 0x9a <bluetooth_ReceiveByte>
- 44c:	0e 94 45 02 	call	0x48a	; 0x48a <SPI_TranSiver>
- 450:	fb cf       	rjmp	.-10     	; 0x448 <main+0x38>
+00000410 <LCD_Clear>:
+ 410:	81 e0       	ldi	r24, 0x01	; 1
+ 412:	0c 94 19 01 	jmp	0x232	; 0x232 <LCD_WriteCommand>
 
-00000452 <SPI_Master_Init>:
- 452:	41 e0       	ldi	r20, 0x01	; 1
- 454:	64 e0       	ldi	r22, 0x04	; 4
- 456:	81 e0       	ldi	r24, 0x01	; 1
- 458:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
- 45c:	41 e0       	ldi	r20, 0x01	; 1
- 45e:	65 e0       	ldi	r22, 0x05	; 5
- 460:	81 e0       	ldi	r24, 0x01	; 1
- 462:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
- 466:	40 e0       	ldi	r20, 0x00	; 0
- 468:	66 e0       	ldi	r22, 0x06	; 6
- 46a:	81 e0       	ldi	r24, 0x01	; 1
- 46c:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
- 470:	41 e0       	ldi	r20, 0x01	; 1
- 472:	67 e0       	ldi	r22, 0x07	; 7
- 474:	81 e0       	ldi	r24, 0x01	; 1
- 476:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
- 47a:	80 e5       	ldi	r24, 0x50	; 80
- 47c:	8d b9       	out	0x0d, r24	; 13
- 47e:	08 95       	ret
+00000416 <main>:
+ 416:	cf 93       	push	r28
+ 418:	df 93       	push	r29
+ 41a:	00 d0       	rcall	.+0      	; 0x41c <main+0x6>
+ 41c:	00 d0       	rcall	.+0      	; 0x41e <main+0x8>
+ 41e:	cd b7       	in	r28, 0x3d	; 61
+ 420:	de b7       	in	r29, 0x3e	; 62
+ 422:	19 82       	std	Y+1, r1	; 0x01
+ 424:	1a 82       	std	Y+2, r1	; 0x02
+ 426:	1b 82       	std	Y+3, r1	; 0x03
+ 428:	1c 82       	std	Y+4, r1	; 0x04
+ 42a:	0e 94 61 01 	call	0x2c2	; 0x2c2 <LCD_Init>
+ 42e:	0e 94 41 00 	call	0x82	; 0x82 <bluetooth_Init>
+ 432:	0e 94 87 02 	call	0x50e	; 0x50e <SPI_Master_Init>
+ 436:	0e 94 9e 02 	call	0x53c	; 0x53c <SPI_Master_InitTrans>
+ 43a:	62 e0       	ldi	r22, 0x02	; 2
+ 43c:	80 e0       	ldi	r24, 0x00	; 0
+ 43e:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
+ 442:	80 e6       	ldi	r24, 0x60	; 96
+ 444:	90 e0       	ldi	r25, 0x00	; 0
+ 446:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 44a:	62 e0       	ldi	r22, 0x02	; 2
+ 44c:	81 e0       	ldi	r24, 0x01	; 1
+ 44e:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
+ 452:	8e e6       	ldi	r24, 0x6E	; 110
+ 454:	90 e0       	ldi	r25, 0x00	; 0
+ 456:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 45a:	2f ef       	ldi	r18, 0xFF	; 255
+ 45c:	89 e6       	ldi	r24, 0x69	; 105
+ 45e:	98 e1       	ldi	r25, 0x18	; 24
+ 460:	21 50       	subi	r18, 0x01	; 1
+ 462:	80 40       	sbci	r24, 0x00	; 0
+ 464:	90 40       	sbci	r25, 0x00	; 0
+ 466:	e1 f7       	brne	.-8      	; 0x460 <main+0x4a>
+ 468:	00 c0       	rjmp	.+0      	; 0x46a <main+0x54>
+ 46a:	00 00       	nop
+ 46c:	6e 01       	movw	r12, r28
+ 46e:	e5 e0       	ldi	r30, 0x05	; 5
+ 470:	ce 0e       	add	r12, r30
+ 472:	d1 1c       	adc	r13, r1
+ 474:	0e 94 08 02 	call	0x410	; 0x410 <LCD_Clear>
+ 478:	8c e7       	ldi	r24, 0x7C	; 124
+ 47a:	90 e0       	ldi	r25, 0x00	; 0
+ 47c:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 480:	65 e0       	ldi	r22, 0x05	; 5
+ 482:	81 e0       	ldi	r24, 0x01	; 1
+ 484:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
+ 488:	8e 01       	movw	r16, r28
+ 48a:	0f 5f       	subi	r16, 0xFF	; 255
+ 48c:	1f 4f       	sbci	r17, 0xFF	; 255
+ 48e:	0e 94 4d 00 	call	0x9a	; 0x9a <bluetooth_ReceiveByte>
+ 492:	f8 2e       	mov	r15, r24
+ 494:	0e 94 a2 01 	call	0x344	; 0x344 <LCD_WriteChar>
+ 498:	8c e8       	ldi	r24, 0x8C	; 140
+ 49a:	90 e0       	ldi	r25, 0x00	; 0
+ 49c:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 4a0:	f8 01       	movw	r30, r16
+ 4a2:	f1 92       	st	Z+, r15
+ 4a4:	8f 01       	movw	r16, r30
+ 4a6:	ec 15       	cp	r30, r12
+ 4a8:	fd 05       	cpc	r31, r13
+ 4aa:	89 f7       	brne	.-30     	; 0x48e <main+0x78>
+ 4ac:	89 81       	ldd	r24, Y+1	; 0x01
+ 4ae:	81 33       	cpi	r24, 0x31	; 49
+ 4b0:	e1 f4       	brne	.+56     	; 0x4ea <main+0xd4>
+ 4b2:	8a 81       	ldd	r24, Y+2	; 0x02
+ 4b4:	82 33       	cpi	r24, 0x32	; 50
+ 4b6:	c9 f4       	brne	.+50     	; 0x4ea <main+0xd4>
+ 4b8:	8b 81       	ldd	r24, Y+3	; 0x03
+ 4ba:	83 33       	cpi	r24, 0x33	; 51
+ 4bc:	b1 f4       	brne	.+44     	; 0x4ea <main+0xd4>
+ 4be:	8c 81       	ldd	r24, Y+4	; 0x04
+ 4c0:	84 33       	cpi	r24, 0x34	; 52
+ 4c2:	99 f4       	brne	.+38     	; 0x4ea <main+0xd4>
+ 4c4:	0e 94 08 02 	call	0x410	; 0x410 <LCD_Clear>
+ 4c8:	8e e8       	ldi	r24, 0x8E	; 142
+ 4ca:	90 e0       	ldi	r25, 0x00	; 0
+ 4cc:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 4d0:	60 e0       	ldi	r22, 0x00	; 0
+ 4d2:	81 e0       	ldi	r24, 0x01	; 1
+ 4d4:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
+ 4d8:	80 ea       	ldi	r24, 0xA0	; 160
+ 4da:	90 e0       	ldi	r25, 0x00	; 0
+ 4dc:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 4e0:	0e 94 4d 00 	call	0x9a	; 0x9a <bluetooth_ReceiveByte>
+ 4e4:	0e 94 a3 02 	call	0x546	; 0x546 <SPI_TranSiver>
+ 4e8:	fb cf       	rjmp	.-10     	; 0x4e0 <main+0xca>
+ 4ea:	62 e0       	ldi	r22, 0x02	; 2
+ 4ec:	81 e0       	ldi	r24, 0x01	; 1
+ 4ee:	0e 94 f4 01 	call	0x3e8	; 0x3e8 <LCD_GoTo>
+ 4f2:	81 eb       	ldi	r24, 0xB1	; 177
+ 4f4:	90 e0       	ldi	r25, 0x00	; 0
+ 4f6:	0e 94 e1 01 	call	0x3c2	; 0x3c2 <LCD_WriteString>
+ 4fa:	ff ef       	ldi	r31, 0xFF	; 255
+ 4fc:	29 e6       	ldi	r18, 0x69	; 105
+ 4fe:	88 e1       	ldi	r24, 0x18	; 24
+ 500:	f1 50       	subi	r31, 0x01	; 1
+ 502:	20 40       	sbci	r18, 0x00	; 0
+ 504:	80 40       	sbci	r24, 0x00	; 0
+ 506:	e1 f7       	brne	.-8      	; 0x500 <main+0xea>
+ 508:	00 c0       	rjmp	.+0      	; 0x50a <main+0xf4>
+ 50a:	00 00       	nop
+ 50c:	b3 cf       	rjmp	.-154    	; 0x474 <main+0x5e>
 
-00000480 <SPI_Master_InitTrans>:
- 480:	40 e0       	ldi	r20, 0x00	; 0
- 482:	64 e0       	ldi	r22, 0x04	; 4
- 484:	81 e0       	ldi	r24, 0x01	; 1
- 486:	0c 94 b4 00 	jmp	0x168	; 0x168 <DIO_WritePin>
+0000050e <SPI_Master_Init>:
+ 50e:	41 e0       	ldi	r20, 0x01	; 1
+ 510:	64 e0       	ldi	r22, 0x04	; 4
+ 512:	81 e0       	ldi	r24, 0x01	; 1
+ 514:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
+ 518:	41 e0       	ldi	r20, 0x01	; 1
+ 51a:	65 e0       	ldi	r22, 0x05	; 5
+ 51c:	81 e0       	ldi	r24, 0x01	; 1
+ 51e:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
+ 522:	40 e0       	ldi	r20, 0x00	; 0
+ 524:	66 e0       	ldi	r22, 0x06	; 6
+ 526:	81 e0       	ldi	r24, 0x01	; 1
+ 528:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
+ 52c:	41 e0       	ldi	r20, 0x01	; 1
+ 52e:	67 e0       	ldi	r22, 0x07	; 7
+ 530:	81 e0       	ldi	r24, 0x01	; 1
+ 532:	0e 94 4f 00 	call	0x9e	; 0x9e <DIO_SetPinDir>
+ 536:	80 e5       	ldi	r24, 0x50	; 80
+ 538:	8d b9       	out	0x0d, r24	; 13
+ 53a:	08 95       	ret
 
-0000048a <SPI_TranSiver>:
- 48a:	8f b9       	out	0x0f, r24	; 15
- 48c:	77 9b       	sbis	0x0e, 7	; 14
- 48e:	fe cf       	rjmp	.-4      	; 0x48c <SPI_TranSiver+0x2>
- 490:	8f b1       	in	r24, 0x0f	; 15
- 492:	08 95       	ret
+0000053c <SPI_Master_InitTrans>:
+ 53c:	40 e0       	ldi	r20, 0x00	; 0
+ 53e:	64 e0       	ldi	r22, 0x04	; 4
+ 540:	81 e0       	ldi	r24, 0x01	; 1
+ 542:	0c 94 b4 00 	jmp	0x168	; 0x168 <DIO_WritePin>
 
-00000494 <UART_Init>:
- 494:	54 9a       	sbi	0x0a, 4	; 10
- 496:	80 b5       	in	r24, 0x20	; 32
- 498:	86 68       	ori	r24, 0x86	; 134
- 49a:	80 bd       	out	0x20, r24	; 32
- 49c:	83 e3       	ldi	r24, 0x33	; 51
- 49e:	89 b9       	out	0x09, r24	; 9
- 4a0:	08 95       	ret
+00000546 <SPI_TranSiver>:
+ 546:	8f b9       	out	0x0f, r24	; 15
+ 548:	77 9b       	sbis	0x0e, 7	; 14
+ 54a:	fe cf       	rjmp	.-4      	; 0x548 <SPI_TranSiver+0x2>
+ 54c:	8f b1       	in	r24, 0x0f	; 15
+ 54e:	08 95       	ret
 
-000004a2 <UART_ReceiveByte>:
- 4a2:	5f 9b       	sbis	0x0b, 7	; 11
- 4a4:	fe cf       	rjmp	.-4      	; 0x4a2 <UART_ReceiveByte>
- 4a6:	8c b1       	in	r24, 0x0c	; 12
- 4a8:	08 95       	ret
+00000550 <UART_Init>:
+ 550:	54 9a       	sbi	0x0a, 4	; 10
+ 552:	80 b5       	in	r24, 0x20	; 32
+ 554:	86 68       	ori	r24, 0x86	; 134
+ 556:	80 bd       	out	0x20, r24	; 32
+ 558:	83 e3       	ldi	r24, 0x33	; 51
+ 55a:	89 b9       	out	0x09, r24	; 9
+ 55c:	08 95       	ret
 
-000004aa <_exit>:
- 4aa:	f8 94       	cli
+0000055e <UART_ReceiveByte>:
+ 55e:	5f 9b       	sbis	0x0b, 7	; 11
+ 560:	fe cf       	rjmp	.-4      	; 0x55e <UART_ReceiveByte>
+ 562:	8c b1       	in	r24, 0x0c	; 12
+ 564:	08 95       	ret
 
-000004ac <__stop_program>:
- 4ac:	ff cf       	rjmp	.-2      	; 0x4ac <__stop_program>
+00000566 <_exit>:
+ 566:	f8 94       	cli
+
+00000568 <__stop_program>:
+ 568:	ff cf       	rjmp	.-2      	; 0x568 <__stop_program>
